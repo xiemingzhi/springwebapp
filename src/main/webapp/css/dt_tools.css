@@ -1,0 +1,126 @@
+ul.list_action {
+	list-style-type: none;
+	margin:0;
+	padding:0;
+	text-align:left;
+}
+
+ul.list_action li {
+	display: inline-block;
+	list-style: none outside none;
+	padding-left: 1.6em;
+	background: url(../img/common/action-arrow.png) 1em 1ex no-repeat;
+	text-decoration: underline;
+	cursor: pointer;
+	color: #333333;
+	text-align:left;
+	/*for IE6.7*/
+	zoom:1;
+	*display: inline;
+}
+
+ul.list_action li:hover {
+	color: #1C94C4;
+}
+
+
+
+/*page.css*/
+
+
+
+.dt_container {
+	width: 950px;
+	margin: 30px 0 0 30px;
+	padding: 0;
+	left:0;
+	position: absolute;
+	color:#333333;
+}
+
+.css_right {
+	float: right;
+	background:url(../img/common/list-arrow-down.gif) 0 3px no-repeat !important;
+}
+
+
+
+/*table_jui.css*/
+
+table.display {
+	margin: 0 ;
+	padding:0;
+	clear: both;
+	table-layout:fixed;
+	/*border-collapse: collapse;*/
+}
+
+.dataTables_length {
+	width: 40%;
+	float: left;
+	text-align:left;
+	padding-left:1em;
+}
+
+table.display thead th div.DataTables_sort_wrapper span {
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+	right: 0;
+}
+
+.dataTables_wrapper {
+	position: relative;
+	clear: both;
+	box-shadow:1px 1px 3px rgba(0, 0, 0, 0.35);
+	border-radius:4px;
+}
+
+.dataTables_info {
+	width: 50%;
+	float: left;
+	text-align:left;
+	padding-left:1em;
+}
+
+table.display td.center {
+	text-align: center;
+	border:1px solid #D4D4D4;
+	padding:.5em;
+}
+/*--------- table td control -----------*/
+.tb_left{
+	text-align:left;
+	padding-left:1ex !important;
+	}
+tr.odd {
+	background-color: #DADADA;
+}
+tr.odd td.sorting_1 {
+	background-color: #C0C0C0;	
+}
+tr.even {
+	background-color: #F2F2F2;
+}
+tr.even td.sorting_1 {
+	background-color: #DEDEDE;	
+}
+table.display td {
+	overflow:hidden;
+	padding:5px 0 5px 0;
+	/*text-overflow: ellipsis;*/
+}
+
+
+/*jquery-ui-1.8.23.custom.css*/
+
+
+.ui-icon-triangle-1-n { 
+	background-position: 0 0; 
+	background:url(../img/common/list-arrow-up.gif) 0 3px no-repeat !important;
+}
+
+.ui-icon-carat-2-n-s { 
+	background-position: 0 0; 
+	background:url(../img/common/list-arrow.gif) 0 3px no-repeat !important;
+}
