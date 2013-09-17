@@ -241,7 +241,7 @@
 				<configuration>
 					<url>http://127.0.0.1:8080/manager</url>
 					<server>TomcatServer</server>
-					<path>/mkyongWebApp</path>
+					<path>/springwebapp</path>
 				</configuration>
 			</plugin>
 			<!-- Maven compiler plugin -->
