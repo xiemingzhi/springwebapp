@@ -1,4 +1,4 @@
-springwebapp: Web Application Using Spring Framework And JAX-RS
+A Web Application Using Spring Framework And JAX-RS
 ===============================================================
 
 What is it?
