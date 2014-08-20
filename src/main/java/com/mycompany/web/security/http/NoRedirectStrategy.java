@@ -7,11 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by IntelliJ IDEA.
- * User: kevinpotgieter
- * Date: 27/04/2012
- * Time: 13:45
- * To change this template use File | Settings | File Templates.
+ * Do Not Redirect
  */
 public class NoRedirectStrategy implements RedirectStrategy{
 

@@ -17,11 +17,7 @@ import org.springframework.util.Assert;
 import java.text.MessageFormat;
 
 /**
- * Created by IntelliJ IDEA.
- * User: kevinpotgieter
- * Date: 27/04/2012
- * Time: 10:20
- * To change this template use File | Settings | File Templates.
+ * Authentication Provider
  */
 public class RESTDaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 

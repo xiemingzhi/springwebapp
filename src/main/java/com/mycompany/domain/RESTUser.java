@@ -6,11 +6,7 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 
 /**
- * Created by IntelliJ IDEA.
- * User: kevinpotgieter
- * Date: 27/04/2012
- * Time: 12:53
- * To change this template use File | Settings | File Templates.
+ * User using REST
  */
 public class RESTUser extends User{
 

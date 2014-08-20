@@ -1,11 +1,7 @@
 package com.mycompany;
 
 /**
- * Created by IntelliJ IDEA.
- * User: kevinpotgieter
- * Date: 30/04/2012
- * Time: 08:41
- * To change this template use File | Settings | File Templates.
+ * UserNotFoundException
  */
 public class UserNotFoundException extends RuntimeException{
 

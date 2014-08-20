@@ -11,11 +11,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by IntelliJ IDEA.
- * User: kevinpotgieter
- * Date: 27/04/2012
- * Time: 10:34
- * To change this template use File | Settings | File Templates.
+ * Encoding Service
  */
 public class HMacShaPasswordEncoder implements PasswordEncoder {
 

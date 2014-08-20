@@ -1,11 +1,7 @@
 package com.mycompany.web.security.tokens;
 
 /**
- * Created by IntelliJ IDEA.
- * User: kevinpotgieter
- * Date: 27/04/2012
- * Time: 10:24
- * To change this template use File | Settings | File Templates.
+ * Stores the credentials
  */
 public final class RESTCredentials {
 

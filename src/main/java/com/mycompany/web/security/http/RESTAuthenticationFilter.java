@@ -17,11 +17,7 @@ import java.net.URLDecoder;
 import java.util.Enumeration;
 
 /**
- * Created by IntelliJ IDEA.
- * User: kevinpotgieter
- * Date: 27/04/2012
- * Time: 11:46
- * To change this template use File | Settings | File Templates.
+ * Authentication Filter
  */
 public class RESTAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

@@ -8,11 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by IntelliJ IDEA.
- * User: kevinpotgieter
- * Date: 27/04/2012
- * Time: 10:27
- * To change this template use File | Settings | File Templates.
+ * Service implementation
  */
 @Service
 public class UserSecurityServiceImpl implements UserSecurityService{
