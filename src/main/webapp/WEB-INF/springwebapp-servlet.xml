@@ -27,7 +27,7 @@
     </bean>
     
     <!-- DataSource Definition -->
-	<!-- <bean id="dataSource"
+	 <bean id="dataSource"
       	class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName">
 			<value>org.hsqldb.jdbcDriver</value>
@@ -41,14 +41,15 @@
 		<property name="password">
 			<value></value>
 		</property>
-	</bean> -->
+	</bean> 
+	<!-- 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 	    <property name="url" value="jdbc:mysql://localhost:3306/contactdbs?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
 	    <property name="username" value="mycontact"/>
 	    <property name="password" value="mycontact"/>
 	</bean>
-	
+	 -->
 	<!-- Hibernate SessionFactory Definition -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="mappingResources">

@@ -34,7 +34,7 @@ No WebApplicationContext found: no ContextLoaderListener registered?
     <servlet-name>springwebapp</servlet-name>
     <url-pattern>*.htm</url-pattern>
   </servlet-mapping>
-   
+  <!--  
   <servlet>
     <servlet-name>jaxws-servlet</servlet-name>
     <servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>
@@ -43,7 +43,7 @@ No WebApplicationContext found: no ContextLoaderListener registered?
     <servlet-name>jaxws-servlet</servlet-name>
     <url-pattern>/ContactAppService</url-pattern>
   </servlet-mapping>
-  
+   -->
   <servlet>
 	<servlet-name>jersey-serlvet</servlet-name>
 	<servlet-class>
