@@ -34,6 +34,8 @@ No WebApplicationContext found: no ContextLoaderListener registered?
     <servlet-name>springwebapp</servlet-name>
     <url-pattern>*.htm</url-pattern>
   </servlet-mapping>
+  
+  <!-- spring web services -->
   <!--  
   <servlet>
     <servlet-name>jaxws-servlet</servlet-name>
@@ -43,7 +45,7 @@ No WebApplicationContext found: no ContextLoaderListener registered?
     <servlet-name>jaxws-servlet</servlet-name>
     <url-pattern>/ContactAppService</url-pattern>
   </servlet-mapping>
-   -->
+   
   <servlet>
 	<servlet-name>jersey-serlvet</servlet-name>
 	<servlet-class>
@@ -61,7 +63,9 @@ No WebApplicationContext found: no ContextLoaderListener registered?
 	<servlet-name>jersey-serlvet</servlet-name>
 	<url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+-->
 
+<!-- spring security -->
 	<!-- <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
