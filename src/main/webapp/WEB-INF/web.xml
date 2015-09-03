@@ -5,14 +5,16 @@
 	<!-- <param-value>classpath:applicationContext.xml</param-value> -->
 	<!-- <param-value>classpath:/springwebapp-servlet.xml</param-value> -->
   <!-- context listener requires context config -->
+  <!-- 
   <context-param>
 	<param-name>contextConfigLocation</param-name>
-	<param-value>/WEB-INF/springwebapp-servlet.xml</param-value>
+	<param-value>/WEB-INF/springwebapp-context.xml</param-value>
   </context-param> 		
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-
+ -->
+ 
 <!-- 
 Upon initialization of a DispatcherServlet, the framework looks for a file named [servlet-name]-servlet.xml 
 in the WEB-INF directory of your web application and creates the beans defined there, overriding the definitions 
