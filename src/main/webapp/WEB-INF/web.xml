@@ -35,15 +35,16 @@ No WebApplicationContext found: no ContextLoaderListener registered?
     <url-pattern>*.htm</url-pattern>
   </servlet-mapping>
    
-  <servlet>
+  <!-- <servlet>
     <servlet-name>jaxws-servlet</servlet-name>
     <servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>jaxws-servlet</servlet-name>
     <url-pattern>/ContactAppService</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
   
+  <!-- http://localhost:8080/springwebapp/rest/ -->
   <servlet>
 	<servlet-name>jersey-serlvet</servlet-name>
 	<servlet-class>

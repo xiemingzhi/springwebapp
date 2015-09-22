@@ -27,13 +27,13 @@
     </bean>
     
     <!-- DataSource Definition -->
-	<!-- <bean id="dataSource"
-      	class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<bean id="dataSourceHSQL"
+      	class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
 			<value>org.hsqldb.jdbcDriver</value>
 		</property>
 		<property name="url">
-			<value>jdbc:hsqldb:mem:contactdb</value>
+			<value>jdbc:hsqldb:mem:memberdb</value>
 		</property>
 		<property name="username">
 			<value>sa</value>
@@ -41,7 +41,7 @@
 		<property name="password">
 			<value></value>
 		</property>
-	</bean> -->
+	</bean>
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 	    <property name="url" value="jdbc:mysql://localhost:3306/contactdbs?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
@@ -50,6 +50,28 @@
 	</bean>
 	
 	<!-- Hibernate SessionFactory Definition -->
+	<bean id="sessionFactoryHSQL" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="mappingResources">
+			<list>
+				<value>Member.hbm.xml</value>	
+			</list>
+		</property>		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.connection.zeroDateTimeBehavior">convertToNull</prop>
+				<prop key="hibernate.sessionVariables">sql_mode='ALLOW_INVALID_DATES'</prop> 
+			</props>
+		</property>	
+		<property name="dataSource">
+			<ref bean="dataSourceHSQL"/>
+		</property>
+	</bean>
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="mappingResources">
 			<list>
@@ -102,6 +124,9 @@
 		<property name="sessionFactory"><ref bean="sessionFactory"/></property> 
 		<property name="jdbcExceptionTranslator"><ref bean="jdbcExceptionTranslator"/></property> 
 	</bean> 
+	<bean id="hibernateTemplateHSQL" class="org.springframework.orm.hibernate3.HibernateTemplate"> 
+		<property name="sessionFactory"><ref bean="sessionFactoryHSQL"/></property> 
+	</bean> 
 
 	<!-- Contact DAO Definition: Hibernate implementation -->
 	<bean id="contactDao" class="com.mycompany.dao.ContactDAOHibernate">
@@ -114,6 +139,16 @@
 		</property>
 	</bean>
     
+    <bean id="memberDao" class="com.mycompany.dao.MemberDAOHibernate">
+		<property name="hibernateTemplate"><ref bean="hibernateTemplateHSQL"/></property> 
+	</bean>
+	
+	<bean id="memberApp" class="com.mycompany.MemberApp">
+		<property name="memberDao">
+			<ref bean="memberDao"/>
+		</property>
+	</bean>
+	
     <!-- cannot use this when annotations driven -->
     <!-- listcontacts redirects to listcontacts.jsp -->
     <!-- 
