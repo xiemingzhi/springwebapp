@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:p="http://www.springframework.org/schema/p" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="
+	   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	   ">
+	<context:component-scan base-package="com.mycompany" />	   
+	<context:annotation-config/>
+	
+    <!-- DataSource Definition -->
+	<bean id="dataSourceHSQL" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>org.hsqldb.jdbcDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:hsqldb:mem:memberdb</value>
+		</property>
+		<property name="username">
+			<value>sa</value>
+		</property>
+		<property name="password">
+			<value></value>
+		</property>
+	</bean>
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	    <property name="url" value="jdbc:mysql://localhost:3306/contactdbs?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+	    <property name="username" value="mycontact"/>
+	    <property name="password" value="mycontact"/>
+	</bean>
+	
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="demoRestPersistenceLegacy" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.mycompany.Contact" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true" />
+                <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+            </bean>
+        </property>
+	</bean>
+	<bean id="entityManagerFactoryLegacy"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="demoHSQLPersistence" />
+		<property name="dataSource" ref="dataSourceHSQL" />
+		<property name="packagesToScan" value="com.mycompany.Member" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true" />
+                <property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect" />
+            </bean>
+        </property>
+	</bean>
+	
+	<bean id="myunitTransactionManager"
+    class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory" />
+  </bean>
+  <bean id="myunitTransactionManagerLegacy"
+    class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactoryLegacy" />
+  </bean>
+  
+	<!-- Spring Data Access Exception Translator Defintion -->
+	<!-- <bean id="jdbcExceptionTranslator" class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator"> 
+		<property name="dataSource"><ref bean="dataSource"/></property> 
+	</bean> --> 
+
+	<!-- <bean id="myContactDao" class="com.mycompany.dao.ContactDAOHibernate"/> -->
+	<bean id="myMemberDao" class="com.mycompany.dao.MemberDAOHibernate"/>
+		
+</beans>        

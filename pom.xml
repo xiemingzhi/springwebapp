@@ -41,9 +41,6 @@
 		<version.jackson>2.4.3</version.jackson>
 		<version.slf4j>1.7.5</version.slf4j>
 		
-		<!-- FUHU dependencies -->
-		<version.fuhu.common>0.0.1-SNAPSHOT</version.fuhu.common>
-
 	</properties>
 	
 	<dependencyManagement>
@@ -91,22 +88,56 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Bring in the Servlet jars to avoid errors while compiling with jdt. -->
 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>6.0</version>
-			<scope>provided</scope>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.0_spec</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.servlet.jsp</groupId>
+			<artifactId>jboss-jsp-api_2.2_spec</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
+		<!-- Import the JPA API using the provided scope It is included in JBoss EAP 6 -->
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+        <!-- JSR-303 (Bean Validation) Implementation -->
+        <!-- Provides portable constraints such as @Email -->
+        <!-- Hibernate Validator is shipped in JBoss EAP 6 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>1.0.2</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+        <!-- Annotation processor raises compilation errors whenever constraint
+            annotations are incorrectly used. -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator-annotation-processor</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Spring framework -->
@@ -197,55 +228,6 @@
 			<version>1.8.0.7</version>
 		</dependency>
 
-		<!-- Hibernate framework -->
-
-
-		<!-- Hibernate library dependecy start -->
-		<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-			<version>1.6.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>3.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>2.7.7</version>
-		</dependency>
-		<!-- Hibernate library dependecy end -->
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>3.5.1-Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>3.5.1-Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.3.1.Final</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -264,41 +246,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-bundle</artifactId>
-			<version>1.16</version>
-		</dependency>
-		
-		<!-- Jersey + Spring -->
-		<dependency>
-			<groupId>com.sun.jersey.contribs</groupId>
-			<artifactId>jersey-spring</artifactId>
-			<version>1.8</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-web</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
 			<version>3.9.0.GA</version>
@@ -314,6 +261,7 @@
 			<version>1.2.17</version>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<finalName>springwebapp</finalName>
 		<plugins>
@@ -349,4 +297,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 </project>

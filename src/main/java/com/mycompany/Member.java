@@ -1,20 +1,25 @@
 package com.mycompany;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement
-@XmlType(name="MemberType")
+@Entity
+@Table(name = "member")
 public class Member {
 
-	private String id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private String username;
 	private String email;
 	@XmlElement
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	@XmlElement
@@ -25,7 +30,7 @@ public class Member {
 	public String getEmail() {
 		return email;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public void setUsername(String username) {

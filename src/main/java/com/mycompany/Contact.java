@@ -2,6 +2,10 @@ package com.mycompany;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
@@ -14,9 +18,11 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author testuser
  * This is DTO class. It will be used for carrying one row of Contact Table
  */
-@XmlRootElement
-@XmlType(name="ContactType")
+@Entity
+@Table(name = "contact")
 public class Contact implements Serializable{
+	@Id
+	@GeneratedValue
 	int contactId;
 	//Using JSR303 bean validation
 	@NotEmpty
