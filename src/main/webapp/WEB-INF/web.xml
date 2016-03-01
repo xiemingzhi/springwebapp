@@ -34,32 +34,9 @@ No WebApplicationContext found: no ContextLoaderListener registered?
     <servlet-name>springwebapp</servlet-name>
     <url-pattern>*.htm</url-pattern>
   </servlet-mapping>
-   
-  <servlet>
-    <servlet-name>jaxws-servlet</servlet-name>
-    <servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>
-  </servlet>
   <servlet-mapping>
-    <servlet-name>jaxws-servlet</servlet-name>
-    <url-pattern>/ContactAppService</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-	<servlet-name>jersey-serlvet</servlet-name>
-	<servlet-class>
-		com.sun.jersey.spi.spring.container.servlet.SpringServlet
-	</servlet-class>
-	<init-param>
-		<param-name>
-          com.sun.jersey.config.property.packages
-        </param-name>
-		<param-value>com.mycompany</param-value>
-	</init-param>
-	<load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-	<servlet-name>jersey-serlvet</servlet-name>
-	<url-pattern>/rest/*</url-pattern>
+    <servlet-name>springwebapp</servlet-name>
+    <url-pattern>*.json</url-pattern>
   </servlet-mapping>
 
 	<!-- <filter>
@@ -79,7 +56,5 @@ No WebApplicationContext found: no ContextLoaderListener registered?
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-  
-  
+    
 </web-app>

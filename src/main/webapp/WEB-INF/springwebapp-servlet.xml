@@ -20,12 +20,23 @@
         <property name="basename"><value>messages</value></property>
     </bean>
     
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass"><value>org.springframework.web.servlet.view.JstlView</value></property>
-        <property name="prefix"><value>/jsp/</value></property>
-        <property name="suffix"><value>.jsp</value></property>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	    <property name="viewResolvers">
+	        <list>
+	            <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	            	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+	                <property name="prefix" value="/jsp/"/>
+	                <property name="suffix" value=".jsp"/>
+	            </bean>
+	        </list>
+	    </property>
+	    <property name="defaultViews">
+	        <list>
+	            <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	        </list>
+	    </property>
     </bean>
-    
+       
     <!-- DataSource Definition -->
 	<!-- <bean id="dataSource"
       	class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">

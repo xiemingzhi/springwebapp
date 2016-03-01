@@ -2,21 +2,17 @@ package com.mycompany;
 
 import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.dao.ContactDAO;
 
@@ -25,8 +21,8 @@ import com.mycompany.dao.ContactDAO;
  * @author ming
  *
  */
-@Component
-@Path("/contact")
+@Controller
+@RequestMapping("/contact")
 public class RestfulContactService {
 	protected final Log logger = LogFactory.getLog(getClass());
 	@Autowired
@@ -39,54 +35,40 @@ public class RestfulContactService {
 	public void setContactDao(ContactDAO contactDao) {
 		this.contactDao = contactDao;
 	}*/
-	
-	@GET
-	@Path("/num")
-	@Produces("text/plain")
-	public Response getContactNum() {
+	@RequestMapping(value = "/num", method = RequestMethod.GET, produces = "text/plain")
+	public @ResponseBody ResponseEntity<Object> getContactNum() {
 		String result = "number of contacts is "+contactDao.getContacts().size();
-		return Response.status(200).entity(result).build();
+		return new ResponseEntity<Object>((result), HttpStatus.OK);
 	}
 
-	@GET
-	@Path("/xmllist")
-	@Produces(MediaType.APPLICATION_XML)
+	@RequestMapping(value = "/xmllist", method = RequestMethod.GET, produces = "application/xml")
 	public ContactList getContactsXML() {
 		ContactList cl = new ContactList();
 		cl.setContacts(contactDao.getContacts());
 		return cl;
 	}
 	
-	@GET
-	@Path("/jsonlist")
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(value = "/jsonlist", method = RequestMethod.GET, produces = "application/json")
 	public List<Contact> getContactsJSON() {
 		return contactDao.getContacts();
 	}
 	
 	//post http://localhost:8080/springwebapp/rest/contact
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-    public Response createContact(Contact order) {
+	@RequestMapping( method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public @ResponseBody ResponseEntity<Object> createContact(Contact order) {
 		contactDao.insertContact( order);
 		logger.debug("contact created id;"+order.getContactId());
-		return Response.status(201).entity(order).build();
+		return new ResponseEntity<Object>((order), HttpStatus.OK);
     }
-	
-	@DELETE
-	@Path("/{id}")
-	public void deleteContact(@PathParam("id") String contactId) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")	
+	public void deleteContact(@PathVariable("id") String contactId) {
 		contactDao.deleteContact(Integer.parseInt(contactId));
 	}
-	
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-    public Response updateContact(Contact order) {
+	@RequestMapping( method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")	
+    public @ResponseBody ResponseEntity<Object> updateContact(Contact order) {
 		logger.debug("contact updating id;"+order.getContactId());
 		contactDao.updateContact( order);
-		return Response.status(202).entity(order).build();
+		return new ResponseEntity<Object>((order), HttpStatus.OK);
     }
 	
 }
