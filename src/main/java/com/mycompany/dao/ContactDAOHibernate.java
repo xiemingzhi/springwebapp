@@ -1,52 +1,53 @@
 package com.mycompany.dao;
 
-import java.sql.SQLException;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.mycompany.Contact;
-
+@Repository
+@Transactional
 public class ContactDAOHibernate implements ContactDAO{
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	SessionFactory sessionFactory;
-	
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+	@PersistenceContext
+    private EntityManager em;
 	
 	public void insertContact(Contact contact) {
 		logger.debug("Inside ContactDAOHibernate.insert() method");
-		sessionFactory.getCurrentSession().save(contact);
+		em.persist(contact);
 	}
 	
 	public List getContacts() {
 		logger.debug("Inside ContactDAOHibernate.getContacts() method");
-		Query query = sessionFactory.getCurrentSession().createQuery("select distinct contact from Contact contact order by contact.contactId");
-		List list = query.list();
+		Query query = em.createQuery("select distinct contact from Contact contact order by contact.contactId");
+		List list = query.getResultList();
 		return list;
 	}
 	
 	public Contact getContact(int contactId) {
 		logger.debug("Inside ContactDAOHibernate.getContact() method");
-		return (Contact)sessionFactory.getCurrentSession().get(Contact.class, contactId);
+		return (Contact)em.find(Contact.class, contactId);
 	}
 	
 	public void updateContact(Contact contact) {
 		logger.debug("Inside ContactDAOHibernate.updateContact() method");
-		this.sessionFactory.getCurrentSession().update(contact);
+		this.em.refresh(contact);
 	}
 	
 	public void deleteContact(int contactId) {
 		logger.debug("Inside ContactDAOHibernate.deleteContact() method");
-		Contact c = (Contact)sessionFactory.getCurrentSession().get(Contact.class, contactId);
-		if (c!=null) this.sessionFactory.getCurrentSession().delete(c);
+		Contact c = (Contact)em.find(Contact.class, contactId);
+		if (c!=null) this.em.remove(c);
 		else logger.debug("Inside ContactDAOHibernate.deleteContact() method no such id found");
 	}
 	
