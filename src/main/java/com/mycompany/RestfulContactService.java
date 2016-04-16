@@ -56,12 +56,14 @@ public class RestfulContactService {
 	}
 	
 	@RequestMapping(value = "/jsonlist", method = RequestMethod.GET, produces = "application/json")
-	public List<Contact> getContactsJSON() {
-		List<Contact> cl = new ArrayList<Contact>();
+	public @ResponseBody ResponseEntity<Object> getContactsJSON() {
+		List<Contact> contactList = new ArrayList<Contact>();
 		for (Contact c : contactDao.findAll()) {
-			cl.add(c);
+			contactList.add(c);
 		}
-		return cl;
+		ContactList cl = new ContactList();
+		cl.setContacts(contactList);
+		return new ResponseEntity<Object>(cl, HttpStatus.OK);
 	}
 	
 	//post http://localhost:8080/springwebapp/rest/contact
