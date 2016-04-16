@@ -2,6 +2,9 @@ package com.mycompany;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
@@ -16,8 +19,11 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @XmlRootElement
 @XmlType(name="ContactType")
+@Entity
 public class Contact implements Serializable{
-	int contactId;
+	@Id
+	@GeneratedValue
+	Integer contactId;
 	//Using JSR303 bean validation
 	@NotEmpty
     @Size(max=64)
@@ -27,7 +33,7 @@ public class Contact implements Serializable{
 	public Contact(){
 		
 	}
-	public Contact(int id, String firstName, String lastName, String email) {
+	public Contact(Integer id, String firstName, String lastName, String email) {
 		contactId = id;
 		this.email = email;
 		this.firstName = firstName;

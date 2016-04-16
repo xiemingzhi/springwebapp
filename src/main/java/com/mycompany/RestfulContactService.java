@@ -1,5 +1,6 @@
 package com.mycompany;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -37,37 +38,47 @@ public class RestfulContactService {
 	}*/
 	@RequestMapping(value = "/num", method = RequestMethod.GET, produces = "text/plain")
 	public @ResponseBody ResponseEntity<Object> getContactNum() {
-		String result = "number of contacts is "+contactDao.getContacts().size();
+		int count = 0;
+		for (Contact c : contactDao.findAll()) {
+			count++;
+		}
+		String result = "number of contacts is "+count;
 		return new ResponseEntity<Object>((result), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/xmllist", method = RequestMethod.GET, produces = "application/xml")
 	public ContactList getContactsXML() {
 		ContactList cl = new ContactList();
-		cl.setContacts(contactDao.getContacts());
+		for (Contact c : contactDao.findAll()) {
+			cl.getContacts().add(c);
+		}
 		return cl;
 	}
 	
 	@RequestMapping(value = "/jsonlist", method = RequestMethod.GET, produces = "application/json")
 	public List<Contact> getContactsJSON() {
-		return contactDao.getContacts();
+		List<Contact> cl = new ArrayList<Contact>();
+		for (Contact c : contactDao.findAll()) {
+			cl.add(c);
+		}
+		return cl;
 	}
 	
 	//post http://localhost:8080/springwebapp/rest/contact
 	@RequestMapping( method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public @ResponseBody ResponseEntity<Object> createContact(Contact order) {
-		contactDao.insertContact( order);
+		contactDao.save( order);
 		logger.debug("contact created id;"+order.getContactId());
 		return new ResponseEntity<Object>((order), HttpStatus.OK);
     }
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")	
 	public void deleteContact(@PathVariable("id") String contactId) {
-		contactDao.deleteContact(Integer.parseInt(contactId));
+		contactDao.delete(Integer.parseInt(contactId));
 	}
 	@RequestMapping( method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")	
     public @ResponseBody ResponseEntity<Object> updateContact(Contact order) {
 		logger.debug("contact updating id;"+order.getContactId());
-		contactDao.updateContact( order);
+		contactDao.save( order);
 		return new ResponseEntity<Object>((order), HttpStatus.OK);
     }
 	
