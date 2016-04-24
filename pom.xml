@@ -105,6 +105,18 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         
+		    <!-- Maven Tomcat Plugin -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<server>TomcatServer</server>
+					<path>/springwebapp</path>
+				</configuration>
+			</plugin>
+			
 		</plugins>
+			
 	</build>
 </project>
