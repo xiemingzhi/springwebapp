@@ -44,11 +44,11 @@ public class RestfulContactService {
 	}
 	
 	@RequestMapping(value = "/jsonlist", method = RequestMethod.GET, produces = "application/json")
-	public ContactList getContactsJSON() {
+	public List<Contact> getContactsJSON() {
 		List<Contact> contactList = contactDao.getContacts();
 		ContactList cl = new ContactList();
 		cl.setContacts(contactList);
-		return cl;
+		return contactList;
 	}
 	
 	//post http://localhost:8080/springwebapp/rest/contact
