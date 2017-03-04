@@ -11,9 +11,12 @@
 	   ">
 	
 	<!-- Proper separation of concerns : web to service layer -->
-	<context:component-scan base-package="com.mycompany" />	
+	<context:component-scan base-package="com.mycompany.web" />	
 	<context:annotation-config/>
-	
+	<!-- <context:spring-configured/> -->
+    <context:load-time-weaver
+            weaver-class="org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver"/>
+                    
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename"><value>messages</value></property>
     </bean>
