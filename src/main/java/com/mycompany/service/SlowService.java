@@ -16,6 +16,6 @@ public class SlowService {
 		}
 		logger.info("finish slow work");
 		// return "forward:/another"; // forward to another url
-		return "index"; // return view's name
+		return "success"; // return view's name
 	}
 }
