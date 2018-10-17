@@ -7,8 +7,8 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,12 +22,13 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@SpringBootApplication
 @Configuration
 @EnableAutoConfiguration
 @EnableJpaRepositories
 @EnableTransactionManagement
 @ComponentScan
-public class Application extends SpringBootServletInitializer {
+public class Application extends org.springframework.boot.web.support.SpringBootServletInitializer {
 	@Value("${spring.datasource.driver-class-name}")
 	private String driverClassName;
 

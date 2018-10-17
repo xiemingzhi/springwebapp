@@ -1,5 +1,9 @@
 package com.mycompany;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +14,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mycompany.dao.ContactDAO;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * http://localhost:8080/springwebapp/rest/contact/num
@@ -68,5 +75,22 @@ public class RestfulContactService {
 		contactDao.updateContact( order);
 		return order;
     }
-	
+
+	@PostMapping("/uploadExcelFile")
+	public String uploadFile(Model model, MultipartFile file) throws IOException {
+		InputStream in = file.getInputStream();
+		File currDir = new File(".");
+		String path = currDir.getAbsolutePath();
+		String fileLocation = path.substring(0, path.length() - 1) + file.getOriginalFilename();
+		FileOutputStream f = new FileOutputStream(fileLocation);
+		int ch = 0;
+		while ((ch = in.read()) != -1) {
+			f.write(ch);
+		}
+		f.flush();
+		f.close();
+		model.addAttribute("message", "File: " + file.getOriginalFilename()
+				+ " has been uploaded successfully!");
+		return "excel";
+	}
 }
